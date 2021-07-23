@@ -10,6 +10,7 @@ namespace AS
         InputHandler inputHandler;
         public Vector3 moveDirection;
         PlayerManager playerManager;
+        CameraHandler cameraHandler;
 
         [HideInInspector]
         public Transform myTransform;
@@ -39,6 +40,13 @@ namespace AS
         [SerializeField]
         float fallingSpeed = 50;
 
+        public CapsuleCollider characterCollider;
+        public CapsuleCollider characterCollisionBlockerCollider;
+
+        private void Awake()
+        {
+            cameraHandler = FindObjectOfType<CameraHandler>();
+        }
         private void Start()
         {
             playerManager = GetComponent<PlayerManager>();
@@ -51,6 +59,8 @@ namespace AS
 
             playerManager.IsGrounded = true;
             ignoreForGroundCheck = ~(1 << 8 | 1 << 11);
+
+            Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
         }
         #region Movement
         Vector3 normalVector;
@@ -58,24 +68,58 @@ namespace AS
 
         private void HandleRotation(float delta)
         {
-            Vector3 targetDir = Vector3.zero;
-            float moveOverride = inputHandler.moveAmount;
-
-            targetDir = cameraObject.forward * inputHandler.vertical;
-            targetDir += cameraObject.right * inputHandler.horizontal;
-
-            targetDir.Normalize();
-            targetDir.y = 0;
-            if (targetDir == Vector3.zero)
+            if (inputHandler.lockOnFlag)
             {
-                targetDir = myTransform.forward;
+                if (inputHandler.sprintFlag || inputHandler.rollFlag)
+                {
+                    Vector3 targetDirection = Vector3.zero;
+                    targetDirection = cameraHandler.cameraTransform.forward * inputHandler.vertical;
+                    targetDirection += cameraHandler.cameraTransform.right * inputHandler.horizontal;
+                    targetDirection.Normalize();
+                    targetDirection.y = 0;
+
+                    if (targetDirection == Vector3.zero)
+                    {
+                        targetDirection = transform.forward;
+                    }
+
+                    Quaternion tr = Quaternion.LookRotation(targetDirection);
+                    Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.deltaTime);
+
+                    transform.rotation = targetRotation;
+                } 
+                else
+                {
+                    Vector3 rotationDirection = moveDirection;
+                    rotationDirection = cameraHandler.currentLockOnTarget.position - transform.position;
+                    rotationDirection.y = 0;
+                    rotationDirection.Normalize();
+                    Quaternion tr = Quaternion.LookRotation(rotationDirection);
+                    Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.deltaTime);
+                    transform.rotation = targetRotation;
+                }
             }
-            float rs = rotationSpeed;
+            else
+            {
+                Vector3 targetDir = Vector3.zero;
+                float moveOverride = inputHandler.moveAmount;
 
-            Quaternion tr = Quaternion.LookRotation(targetDir);
-            Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
+                targetDir = cameraObject.forward * inputHandler.vertical;
+                targetDir += cameraObject.right * inputHandler.horizontal;
 
-            myTransform.rotation = targetRotation;
+                targetDir.Normalize();
+                targetDir.y = 0;
+                if (targetDir == Vector3.zero)
+                {
+                    targetDir = myTransform.forward;
+                }
+                float rs = rotationSpeed;
+
+                Quaternion tr = Quaternion.LookRotation(targetDir);
+                Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
+
+                myTransform.rotation = targetRotation;
+            }
         }
         public void HandleMovement(float delta)
         {
@@ -96,7 +140,7 @@ namespace AS
 
             float speed = movementSpeed;
 
-            if (inputHandler.sprintFlag)
+            if (inputHandler.sprintFlag && inputHandler.moveAmount > 0.5)
             {
                 speed = sprintSpeed;
                 playerManager.IsSprinting = true;
@@ -105,11 +149,19 @@ namespace AS
             else
             {
                 moveDirection *= speed;
+                playerManager.IsSprinting = false;
             }
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
             rigidbody.velocity = projectedVelocity;
 
-            animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.IsSprinting);
+            if (inputHandler.lockOnFlag && inputHandler.sprintFlag == false)
+            {
+                animatorHandler.UpdateAnimatorValues(inputHandler.vertical, inputHandler.horizontal, playerManager.IsSprinting);
+            }
+            else
+            {
+                animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.IsSprinting);
+            }
 
             if (animatorHandler.canRotate)
             {
@@ -179,7 +231,7 @@ namespace AS
                     }
                     else
                     {
-                        animatorHandler.PlayTargetAnimation("Locomotion", false);
+                        animatorHandler.PlayTargetAnimation("Empty", false);
                         InTheAirTimer = 0;
                     }
                     
@@ -206,15 +258,31 @@ namespace AS
                     playerManager.IsInTheAir = true;
                 }
             }
-            if (playerManager.IsGrounded)
-            {
                 if (playerManager.IsInteracting || inputHandler.moveAmount > 0)
                 {
-                    myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, Time.deltaTime);
+                    myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, Time.deltaTime / 0.1f);
                 }
                 else
                 {
                     myTransform.position = targetPosition;
+                }
+        }
+        public void HandleJumping()
+        {
+            if (playerManager.IsInteracting == true)
+            {
+                return;
+            }
+            if (inputHandler.jump_Input == true)
+            {
+                if (inputHandler.moveAmount > 0)
+                {
+                    moveDirection = cameraObject.forward * inputHandler.vertical;
+                    moveDirection += cameraObject.right * inputHandler.horizontal;
+                    animatorHandler.PlayTargetAnimation("Jump", true);
+                    moveDirection.y = 0;
+                    Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
+                    myTransform.rotation = jumpRotation;
                 }
             }
         }

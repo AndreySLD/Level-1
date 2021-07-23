@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AS
 {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : CharacterManager
     {
         InputHandler inputHandler;
         Animator anim;
@@ -16,6 +16,8 @@ namespace AS
         public bool IsSprinting;
         public bool IsInTheAir;
         public bool IsGrounded;
+        public bool canCombo;
+        public bool isInvulnerable;
         public void Start()
         {
             inputHandler = GetComponent<InputHandler>();
@@ -26,12 +28,16 @@ namespace AS
         public void Update()
         {
             IsInteracting = anim.GetBool("IsInteracting");
+            canCombo = anim.GetBool("canCombo");
+            isInvulnerable = anim.GetBool("isInvulnerable");
+            anim.SetBool("IsInTheAir", IsInTheAir);
 
             float delta = Time.deltaTime;
             inputHandler.TickInput(delta);
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleRollingAndSprinting(delta);
             playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
+            playerLocomotion.HandleJumping();
         }
         public void FixedUpdate()
         {
@@ -47,7 +53,10 @@ namespace AS
         {
             inputHandler.rollFlag = false;
             inputHandler.sprintFlag = false;
-            IsSprinting = inputHandler.B_Input;
+            inputHandler.la_Input = false;
+            inputHandler.ha_Input = false;
+            inputHandler.jump_Input = false;
+            inputHandler.lockOn_Input = false;
 
             if (IsInTheAir)
             {
