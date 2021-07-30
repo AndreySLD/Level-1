@@ -140,6 +140,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWeaponDamage: 25
+  KnockDown: 0
+  alwaysKnockDown: 0
 --- !u!1 &5275251590839094855
 GameObject:
   m_ObjectHideFlags: 0

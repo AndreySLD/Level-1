@@ -4,21 +4,22 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Shootable
   - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enviroment
   - Water
   - UI
   - 
   - 
-  - Enviroment
   - Character
+  - Player
   - Controller
   - CharacterCollisionBlocker
-  - Player
+  - 
   - 
   - 
   - 
@@ -39,6 +40,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Fire
+    uniqueID: 3804908061
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
