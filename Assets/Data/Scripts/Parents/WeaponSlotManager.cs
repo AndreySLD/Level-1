@@ -13,7 +13,10 @@ namespace AS
         DamageCollider rightHandDamageCollider;
         DamageCollider leftHandDamageCollider;
 
+        [HideInInspector]
         public bool isHyperArmored;
+        [HideInInspector]
+        public bool allowRagdoll;
 
         private void Awake()
         {
@@ -60,13 +63,33 @@ namespace AS
         }
         public void OpenPlungingAttack()
         {
-            rightHandDamageCollider.KnockDown = true; 
-            leftHandDamageCollider.KnockDown = true;
+            if (rightHandDamageCollider != null)
+            {
+                rightHandDamageCollider.KnockDown = true;
+            }
+            if (leftHandDamageCollider != null)
+            {
+                leftHandDamageCollider.KnockDown = true;
+            }
         }
         public void ClosePlungingAttack()
         {
-            leftHandDamageCollider.KnockDown = false;
-            rightHandDamageCollider.KnockDown = false;
+            if (rightHandDamageCollider != null)
+            {
+                leftHandDamageCollider.KnockDown = false;
+            }
+            if (leftHandDamageCollider != null)
+            {
+                rightHandDamageCollider.KnockDown = false;
+            }
+        }
+        public void EnableRagdoll()
+        {
+            allowRagdoll = true;
+        }
+        public void DisableRagdoll()
+        {
+            allowRagdoll = false;
         }
         #endregion
         #region Damage Colliders
@@ -80,19 +103,31 @@ namespace AS
         }
         public void OpenRightDamageCollider()
         {
-            rightHandDamageCollider.EnableDamageCollider();
+            if (rightHandDamageCollider != null)
+            {
+                rightHandDamageCollider.EnableDamageCollider();
+            }
         }
         public void OpenLeftDamageCollider()
         {
-            leftHandDamageCollider.EnableDamageCollider();
+            if (leftHandDamageCollider != null)
+            {
+                leftHandDamageCollider.EnableDamageCollider();
+            }
         }
         public void CloseRightDamageCollider()
         {
-            rightHandDamageCollider.DisableDamageCollider();
+            if (rightHandDamageCollider != null)
+            {
+                rightHandDamageCollider.DisableDamageCollider();
+            }
         }
         public void CloseLeftDamageCollider()
         {
-            leftHandDamageCollider.DisableDamageCollider();
+            if (leftHandDamageCollider != null)
+            {
+                leftHandDamageCollider.DisableDamageCollider();
+            }
         }
         #endregion
     }

@@ -7,14 +7,14 @@ namespace AS
     public class DamageCollider : MonoBehaviour
     {
         Collider damageCollider;
-        WeaponSlotManager weaponSlotManager;
 
         public int currentWeaponDamage = 25;
 
         [HideInInspector]
         public bool KnockDown;
-
         public bool alwaysKnockDown;
+        public bool ragdoll;
+
 
         private void Awake()
         {
@@ -22,7 +22,6 @@ namespace AS
             damageCollider.gameObject.SetActive(true);
             damageCollider.isTrigger = true;
             damageCollider.enabled = false;
-
         }
         public void EnableDamageCollider()
         {
@@ -42,7 +41,7 @@ namespace AS
         }
         private void OnTriggerEnter(Collider collision)
         {
-            if (collision.tag == "Player")
+            if (collision.tag == "Player" && GetComponentInParent<EnemyStats>())
             {
                 PlayerStats playerStats = collision.GetComponent<PlayerStats>();
 
@@ -55,7 +54,7 @@ namespace AS
                     playerStats.TakeDamage(currentWeaponDamage);
                 }
             }
-            if (collision.tag == "Enemy")
+            if (collision.tag == "Enemy" && GetComponentInParent<PlayerStats>() || (collision.GetComponentInParent<EnemyStats>() != GetComponentInParent<EnemyStats>()))
             {
                 EnemyStats enemyStats = collision.GetComponent<EnemyStats>();
 

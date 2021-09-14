@@ -125,8 +125,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.13258657, y: 0.037610766, z: 0.5465136}
-  m_Center: {x: -0.0031405755, y: 0.003863821, z: -0.30984274}
+  m_Size: {x: 0.11761464, y: 0.03761077, z: 0.62857425}
+  m_Center: {x: 0.00229193, y: 0.0062128045, z: -0.35955176}
 --- !u!114 &2119998523504716436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +142,7 @@ MonoBehaviour:
   currentWeaponDamage: 25
   KnockDown: 0
   alwaysKnockDown: 0
+  ragdoll: 0
 --- !u!1 &5275251590839094855
 GameObject:
   m_ObjectHideFlags: 0

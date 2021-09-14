@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1467332543226370077}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.06916445, y: 0.06916444, z: 0.06916444}
   m_Children: []
@@ -94,8 +94,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3457916, y: 0.78301275, z: 45.834938}
-  m_Center: {x: -0.0013498068, y: 0.00011026857, z: -0.39757437}
+  m_Size: {x: 1.3457916, y: 0.78301275, z: 30.988205}
+  m_Center: {x: -0.0013417867, y: 0.0004884712, z: 11.428013}
 --- !u!114 &3922490966232455374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,7 +109,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWeaponDamage: 40
-  canKnockDown: 0
+  KnockDown: 0
+  alwaysKnockDown: 0
+  ragdoll: 0
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &6398922378954024881
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +139,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6398922378954024881}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.000093, y: 2.344583, z: 2.3892202}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7058511852347729690}
@@ -164,11 +169,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7343230303696095242}
-  m_LocalRotation: {x: -0.36205488, y: -0.26248452, z: -0.7879577, w: 0.42325017}
-  m_LocalPosition: {x: 0.361, y: -0.077, z: 0.03}
+  m_LocalRotation: {x: -0.062477347, y: 0.5317365, z: -0.8026905, w: 0.26275635}
+  m_LocalPosition: {x: 0.165, y: -0.016, z: 0.021}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1467332543226790973}
   m_Father: {fileID: 6398922378954259345}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -46.065, y: 30.139, z: -136.576}
+  m_LocalEulerAnglesHint: {x: 55.166, y: 41.667, z: -121.262}

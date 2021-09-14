@@ -21,6 +21,10 @@ namespace AS
         public bool LockOnLeft_Input;
         public bool jump_Input;
         public bool kick_Input;
+        public bool magickSlot_Input;
+        public bool rightHandSlot_Input;
+        public bool leftHandSlot_Input;
+        public bool consumableSlot_Input;
         
         public bool rollFlag;
         public bool sprintFlag;
@@ -78,6 +82,7 @@ namespace AS
             HandleJumpInput();
             HandleLockOnInput();
             HandleUseConsumableInput();
+            HandleQuickSlotsInput();
         }
         private void HandleMoveInput(float delta)
         {
@@ -205,6 +210,20 @@ namespace AS
             {
                 flask_Input = false;
                 playerInventory.currentCunsumable.AttemptToUseConsumableItem(animatorManager, weaponSlotManager, playerEffectsManager);
+            }
+        }
+        private void HandleQuickSlotsInput()
+        {
+            inputActions.PlayerQuickSlots.RightHandSlot.performed += i => rightHandSlot_Input = true;
+            inputActions.PlayerQuickSlots.LeftHandSlot.performed += i => leftHandSlot_Input = true;
+
+            if (rightHandSlot_Input)
+            {
+                playerInventory.ChangeWeaponInRightHand();
+            }
+            else if (leftHandSlot_Input)
+            {
+                playerInventory.ChangeWeaponInLeftHand();
             }
         }
     }

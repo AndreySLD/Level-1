@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Spear
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
-  itemName: 
-  modelPrefab: {fileID: 6398922378954024881, guid: 0c90f4384ed403742ac0267ea7e464a3, type: 3}
+  itemName: Spear
+  modelPrefab: {fileID: 6398922378954024881, guid: 0c90f4384ed403742ac0267ea7e464a3,
+    type: 3}
   isUnarmed: 0
   OH_Light_Attack_01: 
   OH_Light_Attack_02: 

@@ -24,18 +24,42 @@ namespace AS
                 if (lastAttack == weapon.OH_Light_Attack_01 && inputHandler.la_Input == true)
                 {
                     animatorHandler.PlayTargetAnimation(weapon.OH_Light_Attack_02, true);
+                    lastAttack = weapon.OH_Light_Attack_02;
+                }
+                if (lastAttack == weapon.OH_Light_Attack_01 && inputHandler.ha_Input == true)
+                {
+                    animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_01, true);
+                    lastAttack = weapon.OH_Heavy_Attack_01;
+                }
+                if (lastAttack == weapon.OH_Light_Attack_02 && inputHandler.la_Input == true)
+                {
+                    animatorHandler.PlayTargetAnimation(weapon.OH_Light_Attack_01, true);
+                    lastAttack = weapon.OH_Light_Attack_01;
+                }
+                if (lastAttack == weapon.OH_Light_Attack_02 && inputHandler.ha_Input == true)
+                {
+                    animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_01, true);
+                    lastAttack = weapon.OH_Heavy_Attack_01;
+                }                                
+                if (lastAttack == weapon.OH_Heavy_Attack_01 && inputHandler.la_Input == true)
+                {
+                    animatorHandler.PlayTargetAnimation(weapon.OH_Light_Attack_02, true);
+                    lastAttack = weapon.OH_Light_Attack_02;
                 }
                 if (lastAttack == weapon.OH_Heavy_Attack_01 && inputHandler.ha_Input == true)
                 {
                     animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_02, true);
+                    lastAttack = weapon.OH_Heavy_Attack_02;
                 }
-                if (lastAttack == weapon.OH_Light_Attack_01 && inputHandler.ha_Input == true)
+                if (lastAttack == weapon.OH_Heavy_Attack_02 && inputHandler.la_Input == true)
                 {
-                    animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_02, true);
+                    animatorHandler.PlayTargetAnimation(weapon.OH_Light_Attack_01, true);
+                    lastAttack = weapon.OH_Light_Attack_01;
                 }
-                if (lastAttack == weapon.OH_Heavy_Attack_01 && inputHandler.la_Input == true)
+                if (lastAttack == weapon.OH_Heavy_Attack_02 && inputHandler.ha_Input == true)
                 {
-                    animatorHandler.PlayTargetAnimation(weapon.OH_Light_Attack_02, true);
+                    animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_01, true);
+                    lastAttack = weapon.OH_Heavy_Attack_01;
                 }
             }
         }

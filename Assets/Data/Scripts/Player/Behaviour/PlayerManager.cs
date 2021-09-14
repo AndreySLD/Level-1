@@ -58,6 +58,10 @@ namespace AS
             inputHandler.jump_Input = false;
             inputHandler.lockOn_Input = false;
             inputHandler.kick_Input = false;
+            inputHandler.rightHandSlot_Input = false;
+            inputHandler.leftHandSlot_Input = false;
+            inputHandler.magickSlot_Input = false;
+            inputHandler.consumableSlot_Input = false;
             if (IsInTheAir)
             {
                 playerLocomotion.InTheAirTimer = playerLocomotion.InTheAirTimer + Time.deltaTime;

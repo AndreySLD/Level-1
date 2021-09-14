@@ -13,6 +13,8 @@ namespace AS
 
         WeaponSlotManager weaponSlotManager;
         EnemyLocomotionManager enemyLocomotionManager;
+        RagdollHandler ragdollHandler;
+        EnemyManager enemyManager;
 
         public AudioSource enemyAudio;
         public AudioClip[] _damage;
@@ -23,6 +25,8 @@ namespace AS
             animator = GetComponentInChildren<Animator>();
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
             enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
+            ragdollHandler = GetComponent<RagdollHandler>();
+            enemyManager = GetComponent<EnemyManager>();
         }
 
         private void Start()
@@ -30,9 +34,9 @@ namespace AS
             maxHealth = SetMaxHealthFromLeathLevelFormula();
             currentHealth = maxHealth;
             enemyHealthBar.SetMaxHealth(maxHealth);
+            ragdollHandler.Revive();
         }
-
-        private int SetMaxHealthFromLeathLevelFormula()
+            private int SetMaxHealthFromLeathLevelFormula()
         {
             maxHealth = healthLevel * 10;
             return maxHealth;
@@ -54,6 +58,8 @@ namespace AS
             if (!weaponSlotManager.isHyperArmored)
             {
                 animator.Play("Flinch");
+                enemyManager.isPerfromingAction = true;
+                enemyManager.IsInteracting = true;
             }
             
             if (currentHealth <= 0)
@@ -63,7 +69,7 @@ namespace AS
                 isDead = true;
                 enemyAudio.PlayOneShot(_death[Random.Range(0, _death.Length)]);
                 enemyLocomotionManager.DisablingColliders();
-                Destroy(LockOnTransform);
+                Destroy(LockOnTransform);                
             }
         }
         public void TakeDamageKnockdown(int damage)
@@ -79,6 +85,8 @@ namespace AS
             if(!weaponSlotManager.isHyperArmored)
             {
                 animator.Play("Knockdown");
+                enemyManager.IsInteracting = true;
+                enemyManager.isPerfromingAction = true;
             }
 
             if (currentHealth <= 0)

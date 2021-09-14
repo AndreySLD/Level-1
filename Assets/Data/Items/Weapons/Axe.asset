@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
   itemName: Axe
-  modelPrefab: {fileID: 6748877750667173188, guid: 425ca661e7b32744980cab402f5e21bb, type: 3}
+  modelPrefab: {fileID: 6748877750667173188, guid: 425ca661e7b32744980cab402f5e21bb,
+    type: 3}
   isUnarmed: 0
-  OH_Light_Attack_01: 
-  OH_Light_Attack_02: 
-  OH_Heavy_Attack_01: 
-  OH_Heavy_Attack_02: 
+  OH_Light_Attack_01: Axe_Light_Attack_01
+  OH_Light_Attack_02: Axe_Light_Attack_02
+  OH_Heavy_Attack_01: Axe_Heavy_Attack_01
+  OH_Heavy_Attack_02: Axe_Heavy_Attack_02

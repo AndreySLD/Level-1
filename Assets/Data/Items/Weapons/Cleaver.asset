@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Cleaver
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
-  itemName: 
-  modelPrefab: {fileID: 6114356050638830894, guid: bd8d29c570349ab45b986fa933120e37, type: 3}
+  itemName: Cleaver
+  modelPrefab: {fileID: 6114356050638830894, guid: bd8d29c570349ab45b986fa933120e37,
+    type: 3}
   isUnarmed: 0
   OH_Light_Attack_01: 
   OH_Light_Attack_02: 
