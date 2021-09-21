@@ -11,7 +11,11 @@ namespace AS
         {
             if (other.tag == "Player")
             {
-                SceneManager.LoadScene(0);
+                PlayerInventory playerInventory = other.GetComponent<PlayerInventory>();
+                if (playerInventory.keyCount == 4)
+                {
+                    SceneManager.LoadScene(0);
+                }
             }
         }
     }

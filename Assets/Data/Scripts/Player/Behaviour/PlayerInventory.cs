@@ -20,6 +20,8 @@ namespace AS
         public int currentRightWeaponIndex = -1;
         public int currentLeftWeaponIndex = -1;
 
+        public int keyCount;
+
         private void Awake()
         {
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();

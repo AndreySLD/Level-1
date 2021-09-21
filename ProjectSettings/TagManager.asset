@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Self-harm
   - Interact
+  - Buff
+  - Debuff
   layers:
   - Default
   - TransparentFX

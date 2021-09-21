@@ -32,9 +32,9 @@ namespace AS
 
         [Header("Movement")]
         [SerializeField]
-        float movementSpeed = 5;
+        public float movementSpeed = 5;
         [SerializeField]
-        float sprintSpeed = 7;
+        public float sprintSpeed = 7;
         [SerializeField]
         float rotationSpeed = 10;
         [SerializeField]
