@@ -16,6 +16,9 @@ namespace AS
         public AudioClip[] _damage;
         public AudioClip[] _death;
 
+        public delegate void HPcounter();
+        public event HPcounter onZero;
+
         private void Awake()
         {
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
@@ -37,9 +40,7 @@ namespace AS
         }
         public void TakeDamage(int damage)
         {
-            if (playerManager.isInvulnerable)
-                return;
-            if (isDead)
+            if (playerManager.isInvulnerable || isDead)
                 return;
             currentHealth = currentHealth - damage;
             healthBar.SetCurrentHealth(currentHealth);
@@ -54,6 +55,7 @@ namespace AS
             }
             if (currentHealth <= 0)
             {
+                onZero();
                 currentHealth = 0;
                 animatorHandler.PlayTargetAnimation("Death_01", true);
                 playerAudio.PlayOneShot(_death[Random.Range(0, _death.Length)]);
@@ -62,9 +64,7 @@ namespace AS
         }
         public void TakeDamageKnockdown(int damage)
         {
-            if (playerManager.isInvulnerable)
-                return;
-            if (isDead)
+            if (playerManager.isInvulnerable || isDead)
                 return;
             currentHealth = currentHealth - damage;
             playerAudio.PlayOneShot(_damage[Random.Range(2, 3)]);

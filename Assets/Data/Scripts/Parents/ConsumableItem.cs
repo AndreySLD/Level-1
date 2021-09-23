@@ -18,6 +18,7 @@ namespace AS
         public string consumableAnimation;
         public bool IsInteracting;
 
+        
         public virtual void AttemptToUseConsumableItem(AnimatorManager animatorManager, WeaponSlotManager weaponSlotManager, PlayerEffectsManager playerEffectsManager)
         {
             if (currentItemAmount > 0 && !IsInteracting)

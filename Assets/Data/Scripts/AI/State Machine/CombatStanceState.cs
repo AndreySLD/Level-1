@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace AS
     {
         public AttackState attackState;
         public PursueState pursueState;
+        public IdleState idleState;
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
         {
             if (enemyStats.isDead)
@@ -23,6 +25,14 @@ namespace AS
             
             if (enemyManager.currentRecoveryTime <= 0 && distanceFromTarget <= enemyManager.maximumAttackRange)
             {
+                try 
+                {
+                    if (enemyManager.currentTarget.currentHealth <= 0) throw new Exception();
+                }
+                catch
+                {
+                    return idleState;
+                }
                 return attackState;
             }
             else if (distanceFromTarget > enemyManager.maximumAttackRange)

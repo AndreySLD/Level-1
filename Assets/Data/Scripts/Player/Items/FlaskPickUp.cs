@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,11 +13,23 @@ namespace AS
         private void OnTriggerEnter(Collider other)
         {
             playerInventory = other.GetComponentInChildren<PlayerInventory>();
-            if (playerInventory.currentCunsumable.currentItemAmount < playerInventory.currentCunsumable.maxItemAmount)
+            try
             {
-                playerInventory.currentCunsumable.currentItemAmount = playerInventory.currentCunsumable.currentItemAmount + 1;
-                Destroy(flaskModel);
+                playerInventory.currentCunsumable.currentItemAmount += 1;
+                if (playerInventory.currentCunsumable.currentItemAmount > playerInventory.currentCunsumable.maxItemAmount) throw new Exception();
             }
+            catch
+            {
+                Debug.Log(message: "Инвентарь переполнен");
+                playerInventory.currentCunsumable.currentItemAmount -= 1;
+                return;
+            }
+            Destroy(flaskModel);
+            //if (playerInventory.currentCunsumable.currentItemAmount < playerInventory.currentCunsumable.maxItemAmount)
+            //{
+            //    playerInventory.currentCunsumable.currentItemAmount += 1;
+            //    Destroy(flaskModel);
+            //}
         }
     }
 }

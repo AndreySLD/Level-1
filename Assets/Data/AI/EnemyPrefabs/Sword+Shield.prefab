@@ -3321,6 +3321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackState: {fileID: 5255997174727847857}
   pursueState: {fileID: 5255997175346863225}
+  idleState: {fileID: 5255997174723284774}
 --- !u!1 &5255997175346863226
 GameObject:
   m_ObjectHideFlags: 0

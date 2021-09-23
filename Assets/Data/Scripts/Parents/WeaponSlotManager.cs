@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 namespace AS
@@ -63,6 +65,16 @@ namespace AS
         }
         public void OpenPlungingAttack()
         {
+            //try
+            //{
+            //    rightHandDamageCollider.KnockDown = true;
+            //    leftHandDamageCollider.KnockDown = true;
+            //    if (leftHandDamageCollider || rightHandDamageCollider == null) throw new Exception();
+            //}
+            //catch
+            //{
+            //    Debug.Log(message: "Отсутствует объект");
+            //}
             if (rightHandDamageCollider != null)
             {
                 rightHandDamageCollider.KnockDown = true;
@@ -76,11 +88,11 @@ namespace AS
         {
             if (rightHandDamageCollider != null)
             {
-                leftHandDamageCollider.KnockDown = false;
+                rightHandDamageCollider.KnockDown = false;
             }
             if (leftHandDamageCollider != null)
             {
-                rightHandDamageCollider.KnockDown = false;
+                leftHandDamageCollider.KnockDown = false;
             }
         }
         public void EnableRagdoll()
