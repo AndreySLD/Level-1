@@ -79,9 +79,17 @@ namespace AS
             {
                 rightHandDamageCollider.KnockDown = true;
             }
+            else
+            {
+                throw new Exception(message: "Отсутствует объект в правой руке");
+            }
             if (leftHandDamageCollider != null)
             {
                 leftHandDamageCollider.KnockDown = true;
+            }
+            else
+            {
+                throw new Exception(message: "Отсутствует объект в левой руке");
             }
         }
         public void ClosePlungingAttack()
@@ -90,9 +98,17 @@ namespace AS
             {
                 rightHandDamageCollider.KnockDown = false;
             }
+            else
+            {
+                throw new Exception(message: "Отсутствует объект в правой руке");
+            }
             if (leftHandDamageCollider != null)
             {
                 leftHandDamageCollider.KnockDown = false;
+            }
+            else
+            {
+                throw new Exception(message: "Отсутствует объект в левой руке");
             }
         }
         public void EnableRagdoll()

@@ -12,24 +12,24 @@ namespace AS
 
         private void OnTriggerEnter(Collider other)
         {
-            playerInventory = other.GetComponentInChildren<PlayerInventory>();
-            try
-            {
-                playerInventory.currentCunsumable.currentItemAmount += 1;
-                if (playerInventory.currentCunsumable.currentItemAmount > playerInventory.currentCunsumable.maxItemAmount) throw new Exception();
-            }
-            catch
-            {
-                Debug.Log(message: "Инвентарь переполнен");
-                playerInventory.currentCunsumable.currentItemAmount -= 1;
-                return;
-            }
-            Destroy(flaskModel);
-            //if (playerInventory.currentCunsumable.currentItemAmount < playerInventory.currentCunsumable.maxItemAmount)
+            //playerInventory = other.GetComponentInChildren<PlayerInventory>();
+            //try
             //{
             //    playerInventory.currentCunsumable.currentItemAmount += 1;
-            //    Destroy(flaskModel);
+            //    if (playerInventory.currentCunsumable.currentItemAmount > playerInventory.currentCunsumable.maxItemAmount) throw new Exception();
             //}
+            //catch
+            //{
+            //    Debug.Log(message: "Инвентарь переполнен");
+            //    playerInventory.currentCunsumable.currentItemAmount -= 1;
+            //    return;
+            //}
+            //Destroy(flaskModel);
+            if (playerInventory.currentCunsumable.currentItemAmount < playerInventory.currentCunsumable.maxItemAmount)
+            {
+                playerInventory.currentCunsumable.currentItemAmount += 1;
+                Destroy(flaskModel);
+            }
         }
     }
 }

@@ -7,11 +7,15 @@ namespace AS
     public class PursueState : State
     {
         public CombatStanceState combatStanceState;
+        public IdleState idleState;
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
         {
             if (enemyStats.isDead)
                 return this;
+
+            if (enemyManager.currentTarget.isDead)
+                return idleState;
 
             if (enemyManager.isPerfromingAction)
             {

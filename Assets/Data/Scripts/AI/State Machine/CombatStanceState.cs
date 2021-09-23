@@ -25,13 +25,9 @@ namespace AS
             
             if (enemyManager.currentRecoveryTime <= 0 && distanceFromTarget <= enemyManager.maximumAttackRange)
             {
-                try 
-                {
-                    if (enemyManager.currentTarget.currentHealth <= 0) throw new Exception();
-                }
-                catch
-                {
-                    return idleState;
+                if (enemyManager.currentTarget.currentHealth <= 0)
+                {                    
+                    return idleState;                    
                 }
                 return attackState;
             }

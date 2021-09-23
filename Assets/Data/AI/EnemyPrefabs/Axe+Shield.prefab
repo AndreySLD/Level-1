@@ -1064,6 +1064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatStanceState: {fileID: 1499159267839457203}
+  idleState: {fileID: 1499159267412042296}
 --- !u!1 &1499159268660513316
 GameObject:
   m_ObjectHideFlags: 0
