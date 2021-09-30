@@ -15,8 +15,7 @@ namespace AS
             {
                 return;
             }
-            Interaction();
-            Destroy(gameObject);
+            Interaction();            
         }
     }
 }

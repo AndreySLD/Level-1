@@ -14,6 +14,7 @@ namespace AS
 
             if (tag == "Buff")
             {
+                Destroy(gameObject);
                 if (_index == 0)
                 {
                     playerStats.HealPlayer(10);
@@ -31,6 +32,7 @@ namespace AS
             }
             else if (tag == "Debuff")
             {
+                Destroy(gameObject);
                 if (_index == 0)                
                 {
                     playerLocomotion.movementSpeed = playerLocomotion.movementSpeed - 5;

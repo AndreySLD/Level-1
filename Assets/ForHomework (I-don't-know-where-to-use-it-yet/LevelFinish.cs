@@ -5,17 +5,14 @@ using UnityEngine.SceneManagement;
 
 namespace AS
 {
-    public class LevelFinish : MonoBehaviour
+    public sealed class LevelFinish : Bonus
     {
-        private void OnTriggerEnter(Collider other)
+        protected override void Interaction()
         {
-            if (other.tag == "Player")
+            PlayerInventory playerInventory = FindObjectOfType<PlayerInventory>();
+            if (playerInventory.keyCount == 4)
             {
-                PlayerInventory playerInventory = other.GetComponent<PlayerInventory>();
-                if (playerInventory.keyCount == 4)
-                {
-                    SceneManager.LoadScene(0);
-                }
+                SceneManager.LoadScene(0);
             }
         }
     }
