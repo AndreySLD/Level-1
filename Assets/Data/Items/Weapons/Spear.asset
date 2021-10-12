@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd65b1183d69ece4aaf4d1aea8cee713, type: 3}
+  m_Name: Spear
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 0}
+  itemName: Spear
+  modelPrefab: {fileID: 6398922378954024881, guid: 0c90f4384ed403742ac0267ea7e464a3,
+    type: 3}
+  isUnarmed: 0
+  OH_Light_Attack_01: 
+  OH_Light_Attack_02: 
+  OH_Heavy_Attack_01: 
+  OH_Heavy_Attack_02: 
