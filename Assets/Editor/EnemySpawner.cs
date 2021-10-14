@@ -18,7 +18,6 @@ namespace AS
             SerializedProperty Objects = so.FindProperty("enemyPrefabs");
 
             EditorGUILayout.PropertyField(Objects, true);
-            so.ApplyModifiedProperties();
 
             if (enemyPrefabs != null)
             {
