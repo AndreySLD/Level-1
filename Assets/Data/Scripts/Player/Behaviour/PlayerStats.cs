@@ -44,7 +44,7 @@ namespace AS
             healthBar.SetCurrentHealth(currentHealth);
             if (!playerAudio.isPlaying)
             {
-                playerAudio.PlayOneShot(_damage[Random.Range(0, 1)]);
+                playerAudio.PlayOneShot(_damage[Random.Range(0, _damage.Length)]);
             }
 
             if (!weaponSlotManager.isHyperArmored)
@@ -64,7 +64,7 @@ namespace AS
             if (playerManager.isInvulnerable || isDead)
                 return;
             currentHealth = currentHealth - damage;
-            playerAudio.PlayOneShot(_damage[Random.Range(2, 3)]);
+            playerAudio.PlayOneShot(_damage[Random.Range(0, _damage.Length)]);
             healthBar.SetCurrentHealth(currentHealth);
             
             if(!weaponSlotManager.isHyperArmored)
